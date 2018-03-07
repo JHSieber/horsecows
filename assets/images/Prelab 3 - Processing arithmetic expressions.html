@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0065)http://www.cs.oberlin.edu/~jdonalds/151/labs/prelabs/prelab3.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>Prelab 3 - Processing arithmetic expressions</title>
+    <link rel="stylesheet" type="text/css" href="./Prelab 3 - Processing arithmetic expressions_files/ob.css">
+    
+  </head>
+  <body>
+    <div id="container" class="prelab">
+      <div id="top"> <br>
+        <h1 align="left">CSCI 151 - Prelab 3<br>
+        </h1>
+      </div>
+      <p><em>Due at the start of class on Monday February 26<br>
+        </em></p>
+      <p>In lab 3, you'll be writing the internal computations for a
+        GUI-based Calculator program.&nbsp; In this prelab, you will
+        tackle some of the issues related to the lab.&nbsp; Please write
+        or type up your solutions, and hand in a paper copy by 10 am on
+        Monday.&nbsp; Sign the Honor Pledge somewhere on the
+        paper.&nbsp; Late prelabs are not accepted.<br>
+      </p>
+      <p>I'd recommend reading chapter 11 in Weiss before doing the
+        prelab.<br>
+        <br>
+      </p>
+      <h2>java.util.Stack</h2>
+      <p> Your code for lab 3 will use the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/Stack.html">Stack</a>
+        class found in the java.util package of the java class
+        library.&nbsp; (You don't need to implement your own Stack class
+        for this lab.)&nbsp; Look up the documentation and answer
+        question 1.<br>
+      </p>
+      <ol class="question padded" start="1">
+        <p><strong>Question 1:</strong></p>
+        <p>Which of the methods defined in the Stack class may cause an
+          exception?&nbsp; What type(s) of exception?<br>
+        </p>
+      </ol>
+      <br>
+      <h2>infix and postfix notation</h2>
+      <p>In class, we introduced infix and postfix notation, and showed
+        how they are used by compilers and interpreters in processing
+        arithmetic expressions in programming languages.<br>
+        <br>
+      </p>
+      <ol class="question padded" start="1">
+        <p><strong>Question 2:</strong></p>
+        <p>Translate the following expressions from infix to postfix
+          notation:<br>
+        </p>
+        <p>a.&nbsp; x - y * z<br>
+        </p>
+        <p>b.&nbsp;&nbsp; a * b + c / ( d - e - f )</p>
+      </ol>
+      <br>
+      <h2>Expressions as objects<br>
+      </h2>
+      <p>The Calculator program models arithmetic expressions using Java
+        objects.&nbsp; Two classes, <tt>Number</tt> and <tt>BinaryExpression</tt>,
+        are used to represent expressions.&nbsp; <tt>Number</tt>
+        represents a simple integer value.&nbsp; <tt>BinaryExpression</tt>
+        represents an expression consisting of an operator symbol (e.g.,
+        +,*,etc.) and two subexpressions.&nbsp; In the lab, you'll be
+        writing a <tt>Number</tt> class and a <tt>BinaryExpresion</tt>
+        class, both of which implement an <tt>Expression</tt>
+        interface.<br>
+      </p>
+      <p><tt>Number</tt> will have a constructor<br>
+      </p>
+      <p><tt>Number(int value);</tt><br>
+      </p>
+      <p>For example, you can create an <tt>Expression</tt> object
+        representing the number 362 with the code<br>
+      </p>
+      <p><tt>Expression e1 = new Number(362);</tt><br>
+      </p>
+      <p><tt>BinaryExpression</tt> will have a constructor<br>
+      </p>
+      <p><tt>BinaryExpression(Operator op, Expression operand1,
+          Expression operand2);</tt><br>
+      </p>
+      <p>You can create an <tt>Expression</tt> object representing "10
+        * 45" with the code<br>
+      </p>
+      <p><tt>Expression e2 = new BinaryExpression(new Operator("*"), new
+          Number(10), new Number(45));<br>
+        </tt></p>
+      <p>More complex expressions can be constructed by making a
+        sequence of calls to the constructors.&nbsp; For example, you
+        can combine the e1 and e2 defined above with the statement<br>
+      </p>
+      <p><tt>Expression e3 = new BinaryExpression(new Operator("-"), e1,
+          e2);<br>
+        </tt> <br>
+        so that e3 represents the expression "362 - (10*45)".<br>
+        <br>
+      </p>
+      <ol class="question padded" start="1">
+        <p><strong>Question 3 </strong></p>
+        <p>Using the constructors described above, write Java code to
+          create an Expression object that represents the expression<br>
+        </p>
+        <p>12 * ( 10 + 20 + 30 )<br>
+        </p>
+        <p>Obey the usual operator precedence rules.&nbsp; The code
+          should not actually perform the indicated arithmetic
+          operations.</p>
+      </ol>
+      <br>
+      <h2> Handling parentheses</h2>
+      <h2> </h2>
+      <ol class="question padded" start="5">
+        <strong><br>
+          Question 4:</strong><br>
+        <br>
+        Study the <a href="http://www.cs.oberlin.edu/~jdonalds/151/expressionalgorithms.html">infix-to-postifx
+          algorithm</a> from the class notes.&nbsp; It handles operator
+        precedence and left-to-right associativity, but not
+        parentheses.&nbsp; Think about how the algorithm could be
+        modified to handle parentheses correctly.<br>
+        <br>
+        a.&nbsp; What action should be taken when the next token is a
+        left parenthesis? <br>
+        <br>
+        b.&nbsp; What action should be taken when the next token is a
+        right parenthesis?<br>
+        &nbsp;<br>
+      </ol>
+      <br>
+      <h2>Error checking</h2>
+      <p> It's possbile that the user of the Calculator could enter an
+        invalid infix expression.&nbsp; In that case, the Calculator
+        should detect the error and display a message to the user.<br>
+      </p>
+      <ol class="padded question" start="7">
+        <br>
+        <strong>Question 5:</strong><br>
+        <br>
+        Describe <em>three</em> ways in which an infix expression could
+        be malformed.&nbsp; Give an example of each.<br>
+        <br>
+        <table border="1" cellpadding="2" cellspacing="0" width="100%" align="center">
+          <tbody>
+            <tr>
+              <td height="20" align="center"><b>&nbsp;Error #1</b></td>
+              <td width="80%" align="center">&nbsp;<br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </td>
+            </tr>
+            <tr>
+              <td height="20" align="center"><b>&nbsp;Error #2</b></td>
+              <td width="80%" align="center">&nbsp;<br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </td>
+            </tr>
+            <tr>
+              <td height="20" align="center"><b>&nbsp;Error #3</b></td>
+              <td width="80%" align="center">&nbsp;<br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ol>
+      <br>
+      <h2>handing in your prelab<br>
+      </h2>
+      <p> If you adhered to the honor code in this assignment, add the
+        following statement at the top of your prelab. </p>
+      <blockquote class="honor">
+        <p class="centered"> <q class="honor">I have adhered to the
+            Honor Code in this assignment.</q> </p>
+      </blockquote>
+      <p> Write or type your solutions and hand in a <b>paper copy</b>
+        by the deadline listed at the top of this prelab.&nbsp; Late
+        prelabs will not be accepted.<br>
+        <br>
+      </p>
+    </div>
+  
+
+</body></html>
