@@ -1,0 +1,16 @@
+# main links
+main:
+  - title: "home"
+    url: /index/
+  - title: "photos"
+    url: /photos/
+  - title: "videos"
+    url: /videos/
+  - title: "history"
+    url: /history/
+  - title: "force freedom"
+    url: https://oberlinforcefreedom.weebly.com/
+  - title: "contact"
+    url: /contact/
+  - title: "alumni spotlight"
+    url: /alumni/
