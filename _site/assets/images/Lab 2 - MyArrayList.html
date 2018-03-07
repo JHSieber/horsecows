@@ -1,0 +1,631 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0054)http://www.cs.oberlin.edu/~jdonalds/151/labs/lab2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    
+    <link rel="stylesheet" type="text/css" href="./Lab 2 - MyArrayList_files/ob.css">
+    <title>Lab 2 - MyArrayList</title>
+  </head>
+  <body>
+    <br>
+    <h1>Lab 2 - MyArrayList</h1>
+    <h3>CSCI 151<br>
+      Spring, 2018<br>
+      Due:&nbsp; 11:59 pm, Sunday, February 25 </h3>
+    <p> In this assignment, you will create your first Java class, an
+      implementation of the ArrayList data structure from the <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/collections/index.html">Java
+Collections
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Framework</a>. You will also learn how to use Generics and get
+      some practice writing test cases for your program. The purpose of
+      this lab is to: </p>
+    <ul>
+      <li>Learn how to write your own Java class,<br>
+      </li>
+      <li>Begin learning about Java Collections,</li>
+      <li>Learn how to write a generic class,<br>
+      </li>
+      <li>Learn how to use JUnit to do proper testing of a class.<br>
+      </li>
+    </ul>
+    <ul>
+    </ul>
+    <h2>Part 1:&nbsp; Writing the MyArrayList class</h2>
+    <p> You'll be constructing your very own implementation of the <a href="http://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html">ArrayList</a>
+      data structure so that you understand its inner workings. You
+      should use the prefix <em>My</em> in the class name so that you
+      don't accidentally use the standard ArrayList in your testing.
+      However, you will be matching its behavior, so when in doubt, you
+      can refer back to the ArrayList documentation for clarification
+      and/or use an ArrayList as a working reference solution.<br>
+    </p>
+    <p>Your MyArrayList class will implement the Java <a href="http://docs.oracle.com/javase/8/docs/api/java/util/List.html">List</a>
+      interface.&nbsp; The List interface contains more than 20
+      methods.&nbsp; Your class will contain a subset of these methods.<br>
+      <br>
+      Write MyArrayList as a <span style="font-style: italic;">generic</span>
+      class.&nbsp; That means that the type of objects to be stored in
+      the list is specified when the list is declared or
+      instantiated.&nbsp; Use the header line<br>
+    </p>
+    <pre class="boxed code prettyprint lang-java prettyprinted"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">MyArrayList</span><span class="pun">&lt;</span><span class="typ">E</span><span class="pun">&gt;</span><span class="pln"> </span><span class="kwd">extends</span><span class="pln"> </span><span class="typ">AbstractList</span><span class="pun">&lt;</span><span class="typ">E</span><span class="pun">&gt;</span></pre>
+    <br>
+    Note that you are extending <a href="http://docs.oracle.com/javase/8/docs/api/java/util/AbstractList.html">AbstractList</a>
+    instead of implementing List.&nbsp; AbstractList is an abstract
+    class contained in the java.util package.&nbsp; It contains stub
+    routines for most of the List methods, so you don't have to
+    implement the entire List interface, only the methods indicated in
+    parts 2 and 3 of the lab below.&nbsp; (Two methods which remain
+    abstract in AbstractList are <tt>get</tt> and <tt>size</tt>.&nbsp;
+    You won't be able to compile your class successfully until you write
+    implementations for these two methods.)&nbsp; Since AbstractList
+    implements List, your class will, too.<br>
+    <br>
+    AbstractList is in the java.util package, so you need to write&nbsp;
+    "import java.util.*;" at the beginning of your class file.<br>
+    <br>
+    <em>Note:</em>&nbsp; Don't use any of the methods from the Arrays
+    class in your implementation, with the exception of Arrays.toString,
+    which you may use for testing if you like.<br>
+    <br>
+    <h3> </h3>
+    <h3>Private data </h3>
+    <p>Define the following member variables in your MyArrayList class:</p>
+    <dl class="code">
+      <dt>int size</dt>
+      <dd>the number of items currently stored in the list (which may
+        differ from the list's current capacity)</dd>
+      <dt>E[] data</dt>
+      <dd>the array where the items in the list will actually be stored<br>
+      </dd>
+    </dl>
+    The list items should be stored in consecutive array positions,
+    starting with position 0.&nbsp; For example, if the list contains 4
+    elements, they should be stored in array positions 0, 1, 2, and
+    3.&nbsp; (There should not be any gaps.)<br>
+    <br>
+    Note the difference between the length of the array (data.length)
+    and the size of the list.&nbsp; The array may not always be
+    completely filled up; we allow some extra space for future
+    additions.<br>
+    <br>
+    <h3> Constructors</h3>
+    <p>Recall that the purpose of a constructor is to initialize an
+      object's instance variables.&nbsp; In this case, your constructors
+      must initialize <tt>size</tt> and <tt>data</tt>.&nbsp; Write the
+      following constructors in your MyArrayList class:</p>
+    <dl class="code">
+      <dt>MyArrayList(int startLength) </dt>
+      <dd><tt>startLength</tt> is the initial capacity of the data
+        array.</dd>
+      <dt>MyArrayList() </dt>
+      <dd>Use a default initial capacity of 5.&nbsp; <em>NOTE:</em>&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Avoid duplicating code from your other constructor in this one,
+        by having this constructor call the other with an appropriate
+        argument (that is, use <tt>this(5)</tt>). </dd>
+    </dl>
+    <p> Note:&nbsp; Java does not permit the instantiation of an array
+      of a generic type.&nbsp; To create an array of <tt>E</tt>
+      objects, you need to create an array of type <tt>Object</tt>,
+      then cast it into an array of type <tt>E</tt>.&nbsp; For example,
+      to create an <tt>E</tt> array with 5 elements, you would write:<br>
+    </p>
+    <pre class="boxed code prettyprint lang-java prettyprinted"><span class="typ">E</span><span class="pun">[]</span><span class="pln"> someArray </span><span class="pun">= (</span><span class="typ">E</span><span class="pln"></span><span class="pun">[]) </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">[</span><span class="pln">5</span><span class="pun">];</span></pre>
+    <p> </p>
+    <p> </p>
+    This code will generate a warning message from the compiler.&nbsp;
+    You can (and should) suppress the message by writing the following
+    statement immediately before the method in which the cast operation
+    occurs:<br>
+    <br>
+    <pre class="boxed code prettyprint lang-java prettyprinted"><span class="lit">@SuppressWarnings</span><span class="pun">(</span><span class="str">"unchecked"</span><span class="pun">)</span></pre>
+    <br>
+    <h3>A private method</h3>
+    <p>Write a private method called <tt>resize</tt> that <b>doubles</b>
+      the length of the array by creating a new array of twice the
+      current length, copying the data from the current array to the new
+      one, and then resetting the data pointer to point to the new
+      array.&nbsp; (The old array will eventually be garbage collected.)<br>
+    </p>
+    <dl class="code">
+      <dt>private void resize() </dt>
+      <dd>Create a new array that is twice the size of the current one
+        (use <code>data.length</code>) </dd>
+      <dd>Copy all of the old data into the new array </dd>
+      <dd>Set <code class="prettyprint lang-java">this.data</code> to
+        be your new array </dd>
+    </dl>
+    <p> </p>
+    <p>While you are testing the class, it's a good idea to have the
+      resize method print a message indicating the old and new
+      lengths.&nbsp; You can remove the print statement when it seems to
+      be working.<br>
+      <br>
+    </p>
+    <h3>Some public methods (more to follow)</h3>
+    <p>Implement the following methods in your MyArrayList class</p>
+    <dl class="code">
+      <dt>int size(); </dt>
+      <dd>Return the number of items stored in the list, <em>not</em>
+        the maximum capacity of the underlying array (i.e, not the size
+        of the data array that you get from <code class="prettyprint
+          lang-java prettyprinted"><span class="pln">data</span><span class="pun">.</span><span class="pln">length</span></code>).
+      </dd>
+      <dt>void add(int index, E element); </dt>
+      <dd>Adds the element at the specified index, shifting everything
+        else right one space. </dd>
+      <dd>You are allowed to add at any index location up to and
+        including the current size. (<code class="prettyprint lang-java
+          prettyprinted"><span class="pln">index</span><span class="pun">==</span><span class="pln">size</span></code> is the first unused
+        location.) Resize the array if necessary. </dd>
+      <dd>Throw an <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/IndexOutOfBoundsException.html">IndexOutOfBoundsException</a>
+        if the index is not within the allowed range, with a statement
+        like this: </dd>
+      <dd>
+        <pre class="boxed code prettyprint lang-java prettyprinted"><span class="kwd">throw</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">IndexOutOfBoundsException</span><span class="pun">();</span></pre>
+      </dd>
+      <dd>or even better:</dd>
+      <dd>
+        <pre class="boxed code prettyprint lang-java prettyprinted"><span class="kwd">throw</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">IndexOutOfBoundsException</span><span class="pun">(</span><span class="str">"Index Out of Bounds! You tried to get "</span><span class="pln"> </span><span class="pun">+</span><span class="pln">
+index </span><span class="pun">+</span><span class="pln"> </span><span class="str">" but the size is "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> size </span><span class="pun">);</span></pre>
+      </dd>
+      <dd>or something to that effect. </dd>
+      <dt>boolean add(E element); </dt>
+      <dd>Adds an item to the end of the array.&nbsp; (Hint: you can use
+        the previous method -- don't just copy the code from there.) </dd>
+      <dd>This method returns <tt>true</tt> if the item was
+        added.&nbsp; Since you will always be adding the item specified,
+        you should always return true. </dd>
+      <dt>E get(int index); </dt>
+      <dd>Return the value stored at the given index. </dd>
+      <dd>Throw an <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/IndexOutOfBoundsException.html">IndexOutOfBoundsException</a>
+        if the index is not within the allowed range.&nbsp; Note that
+        this range is smaller than the range allowed for <tt>add()</tt>.
+      </dd>
+    </dl>
+    <br>
+    <h2>Part 2 - Testing with JUnit</h2>
+    <p>We've noted in class that today's software is extremely large and
+      complex.&nbsp; Object-oriented programming deals with this size
+      and complexity by breaking down large programs into small modules
+      (i.e., objects).&nbsp; Software engineers have found that it is
+      not only wise to write their software in small chunks, but also to
+      test it that way.&nbsp; That is, as each class is written, a set
+      of tests is written to verify that it is working properly.&nbsp;
+      This is sometimes called "unit testing."&nbsp; So before you
+      proceed to the rest of your MyArrayList implementation, you will
+      test the code you have written thus far, using a Java testing
+      framework called JUnit.<br>
+    </p>
+    <p>As a side note, some people take this even further, and practice
+      "Test Driven Development."&nbsp; As the name suggests, instead of
+      designing your program to fit some guidelines and THEN deciding
+      what tests are adequate, test driven development FIRST decides on
+      a set of tests that you want your program to "pass", and only then
+      do you design the program to pass those tests. You can read more
+      about this software development technique in many places,
+      including <a href="https://en.wikipedia.org/wiki/Test-driven_development">Wikipedia</a>.<br>
+      <br>
+      The "old" way of testing was to write test cases in a main method
+      somewhere.&nbsp; Although this approach is convenient and simple,
+      it can be ineffective:<br>
+    </p>
+    <ul>
+      <li>There is no explicit concept of a test passing or failing.
+        Typically, the program outputs messages simply with <tt>System.out.println</tt>;
+        the user has to look at this and decide if it is correct.</li>
+      <li><tt>main</tt> has access to <tt>protected</tt> and <tt>private</tt>
+        members and methods. While you may want to test the inner
+        workings of a class, many tests are really about testing an
+        object's interface to the outside world.</li>
+      <li>There is no mechanism to collect results in a structured
+        fashion.</li>
+      <li>There is no replicability. After each test run, a person has
+        to examine and interpret the results.</li>
+    </ul>
+    The JUnit framework addresses these issues, and more.<br>
+    <br>
+    <h3>JUnit<br>
+    </h3>
+    <p>JUnit is a unit testing framework for Java that is supported in
+      Eclipse.&nbsp; It enables developers to easily create Java test
+      cases.&nbsp; It provides a comprehensive assertion facility to
+      verify expected versus actual results.&nbsp; We will use it in
+      this lab to develop tests for the MyArrayList class.&nbsp; You'll
+      be strongly encouraged to continue using it as we write other
+      classes in future assignments.<br>
+    </p>
+    <p>It is simple to write a JUnit test case in Eclipse:</p>
+    <ul>
+      <li>Right click on your MyArrayList class file in the package view
+        in the left pane, and select <b>New &gt; JUnit Test Case</b>. </li>
+      <li>Select the radio button <b>New JUnit 4 test</b> and click <b>Next</b>.
+      </li>
+      <li>Name your test <b>MyArrayListTest</b><br>
+      </li>
+      <li>Do <b>not</b> select anything in the <b>Which method stubs
+          would you like to create?</b> section.</li>
+      <li>Click <b>Browse...</b> in the <b>Class under test: </b>section.</li>
+      <li>Type <b>MyArrayList</b> in the text field in the dialog that
+        came up.&nbsp; Select <b>MyArrayList</b> in the list below.</li>
+      <li>Select <b>Next.</b></li>
+      <li>Select the checkbox to the left of <b>MyArrayList&lt;E&gt;</b>.
+        This should select all the methods that we will test initially.
+        You will be adding tests by hand later.</li>
+      <li>Select <b>Finish</b></li>
+      <li>When it asks if you want to add JUnit4 to the build path,
+        click <b>Perform the following action</b>.</li>
+      <li>You should now have another class file, named something like
+        MyArrayListTest.java. Check it out. Some things to notice: </li>
+      <ul>
+        <li>All test methods are preceded by <tt>@Test</tt>. You can
+          add your own test method provided you use this tag. </li>
+        <li>All test methods start with <tt>test</tt>, followed by the
+          name of the method that is to be tested. For example, <tt>testSize</tt>
+          will test the <tt>size</tt> method. If a method has multiple
+          method signatures (with different parameters) then the test
+          method name will also list the types of the parameters. For
+          example, <tt>testAddE()</tt> and <tt>testAddIntE()</tt> test
+          the <tt>add(E element)</tt> and <tt>add(int index, E
+            element)</tt> methods, respectively. </li>
+        <li>You can use the <tt>@Ignore</tt> tag (instead of the <tt>@Test</tt>
+          tag) to specify JUnit to ignore the test method that follows.
+          Otherwise, JUnit will run the test methods in an arbitrary
+          order (so each one should be self-contained.) </li>
+      </ul>
+    </ul>
+    It is also simple to run your tests:
+    <ul>
+      <li>Right-click your new test class and select <b>Run As &gt;
+          JUnit Test</b>. </li>
+      <li>The results of the tests are displayed in the "JUnit
+        View".&nbsp; Right now all your tests should be failing, as we
+        haven't implemented any yet. </li>
+    </ul>
+    <br>
+    So what can you actually do in these tests?&nbsp; Let's walk through
+    some examples:
+    <ul>
+      <li>To test that your empty constructor is working correctly,
+        replace the <tt>fail(...)</tt> method call with the following
+        code in the <tt>testMyArrayList()</tt> method:
+        <pre class="boxed code prettyprint lang-java prettyprinted"><span class="typ">MyArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;</span><span class="pln"> test </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">MyArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;();</span><span class="pln">
+</span><span class="typ">ArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;</span><span class="pln">   standard </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;();</span><span class="pln">
+assertEquals</span><span class="pun">(</span><span class="str">"Size after construction"</span><span class="pun">,</span><span class="pln"> standard</span><span class="pun">.</span><span class="pln">size</span><span class="pun">(),</span><span class="pln"> test</span><span class="pun">.</span><span class="pln">size</span><span class="pun">());</span></pre>
+        Basically, we construct an arraylist with our implementation,
+        and compare it to that of Java's. Ideally the size of our new
+        arraylist is 0, which should be the same as
+        standard.size().&nbsp; Observe that this is a stand-alone test;
+        it constructs the array lists it needs, and is disjoint from the
+        other tests. <br>
+        <br>
+      </li>
+      <li>To see what would happen if your test failed, change the last
+        line of code to
+        <pre class="boxed code prettyprint lang-java prettyprinted"><span class="pln">assertEquals</span><span class="pun">(</span><span class="str">"Size after construction"</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> test</span><span class="pun">.</span><span class="pln">size</span><span class="pun">());</span></pre>
+        Rerun the test (press the green play-button icon with the yellow
+        arrow), and see how the test fails. Notice that the failure
+        trace conveniently tells you what value you were expecting (2),
+        and what value you actually got (0).&nbsp; Nice!&nbsp; Change it
+        back before proceeding. <br>
+        <br>
+      </li>
+      <li>To test that your size method is working correctly, replace
+        the <tt>fail(...)</tt> method call with the following code in
+        the <tt>testSize</tt> method:
+        <pre class="boxed code prettyprint lang-java prettyprinted"><span class="typ">MyArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;</span><span class="pln"> test </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">MyArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;();</span><span class="pln"> 
+</span><span class="typ">ArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;</span><span class="pln">   standard </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;();</span><span class="pln">
+assertEquals</span><span class="pun">(</span><span class="pln"> </span><span class="str">"Size after construction"</span><span class="pun">,</span><span class="pln"> standard</span><span class="pun">.</span><span class="pln">size</span><span class="pun">(),</span><span class="pln"> test</span><span class="pun">.</span><span class="pln">size</span><span class="pun">());</span><span class="pln">
+test</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="lit">5</span><span class="pun">);</span><span class="pln">
+standard</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="lit">5</span><span class="pun">);</span><span class="pln">
+assertEquals</span><span class="pun">(</span><span class="pln"> </span><span class="str">"Size after add"</span><span class="pun">,</span><span class="pln"> standard</span><span class="pun">.</span><span class="pln">size</span><span class="pun">(),</span><span class="pln"> test</span><span class="pun">.</span><span class="pln">size</span><span class="pun">());</span></pre>
+        <br>
+        Now run the test to verify that your size method is working
+        properly.</li>
+    </ul>
+    <h3>JUnit methods</h3>
+    The JUnit framework contains many useful methods that you can call
+    in your tests.&nbsp; Here is a list of some of them: <br>
+    <dl class="code">
+      <dt>assertTrue([message], boolean condition) </dt>
+      <dt>assertFalse([message], boolean condition) </dt>
+      <dd>Checks that the boolean condition is true (or false), if not,
+        displays the message. </dd>
+      <dt>assertEquals([message], expected, actual) </dt>
+      <dt>assertEquals([message], expected, actual, tolerance) </dt>
+      <dd>Tests that float or double values match. The tolerance is the
+        number of decimals which must be the same. </dd>
+      <dt>assertNull([message], object) </dt>
+      <dd>Checks that the object is null. </dd>
+      <dt>assertNotNull([message], object) </dt>
+      <dd>Checks that the object is not null. </dd>
+      <dt>assertSame([String], expected, actual) </dt>
+      <dd>Checks that both variables refer to the same object. </dd>
+      <dt>assertNotSame([String], expected, actual) </dt>
+      <dd>Checks that both variables refer to different objects. </dd>
+    </dl>
+    <br>
+    For a full list of assert methods, go <a href="http://junit.sourceforge.net/javadoc/index.html?org/junit/Assert.html">here</a>
+    (you may need to click on the Assert class in the left lower pane).<br>
+    <br>
+    You can even test that the correct exceptions are thrown by changing
+    the <tt>@Test</tt> tag before your test method.&nbsp; For example,
+    to test the exception that should be thrown by the add method when
+    adding "off the left" of the list, we could use this code:
+    <pre class="boxed code prettyprint lang-java">@Test(expected=IndexOutOfBoundsException.class)
+public void testForAddLeftException() throws Exception {
+    MyArrayList&lt;Integer&gt; test = new MyArrayList&lt;Integer&gt;();
+    test.add(-1, 5);
+}
+</pre>
+    <br>
+    To test the exception that should be thrown by the add method when
+    adding "off the right" of the list, we would use a second method:<br>
+    <br>
+    <pre class="boxed code prettyprint lang-java">@Test(expected=IndexOutOfBoundsException.class)
+public void testForAddRightException() throws Exception {
+    MyArrayList&lt;Integer&gt; test = new MyArrayList&lt;Integer&gt;();
+    test.add(test.size()+1, 5);
+}
+</pre>
+    <p><br>
+    </p>
+    <h3>Writing your own tests</h3>
+    <p>Now it's your turn.&nbsp; In each of the following test methods,
+      implement the recommended test.<br>
+    </p>
+    <p class="boxed"> <b>NOTE:</b>&nbsp; Some of the these tests ask
+      you to read some input data from a file.&nbsp; You can do this by
+      using a Scanner created to read from a File, as follows:<br>
+      <br>
+      Scanner scanner = new Scanner(new File("test1.txt"));<br>
+      <br>
+      Then just use the Scanner in the usual way.<br>
+    </p>
+    <ul>
+      <li><tt>testAddE()</tt>:&nbsp; Tests your constructor, the
+        single-parameter add method (which should call the two-parameter
+        add method), and the get method.&nbsp; Under the covers, it will
+        also test your private resize method. This also tests adds to
+        the end of the list and adds when the list is at capacity.
+        <p>Create a MyArrayList of Strings and an ArrayList of
+          Strings.&nbsp; Read the file <a href="http://www.cs.oberlin.edu/~jdonalds/151/labs/test1.txt">test1.txt</a>
+          and insert each line of the file, one at a time, into both
+          lists<span style="font-family: monospace;"></span>using their
+          respective <tt>add(element)</tt> methods.&nbsp; Assert that
+          the sizes of the two lists are the same.&nbsp; Then loop
+          through your two lists element-by-element and assert that the
+          i<sup>th</sup> elements should be equal for each i. </p>
+      </li>
+      <li><tt>testAddIntEFront()</tt>:&nbsp; Tests adding to the
+        beginning of the list.
+        <p>Again, read Strings from <a href="http://www.cs.oberlin.edu/~jdonalds/151/labs/test1.txt">test1.txt</a>,
+          but insert each line at the front of both lists using <tt>add(index,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            element)</tt>.&nbsp; Then verify that the lists are
+          identical.<br>
+        </p>
+      </li>
+      <li><tt>testAddIntEMiddle()</tt>:&nbsp; Tests adding to the middle
+        of the list.
+        <p>Once more, read Strings from test1.txt.&nbsp; This time
+          insert each line at the current midpoint (position size/2) of
+          the list.</p>
+      </li>
+      <li>Write methods to test the IndexOutOfBounds exceptions on both
+        borders (index -1 and index size or size+1, depending on the
+        method) for the parameterized add method and the get method. </li>
+    </ul>
+    There you go, your very first JUnit tests!&nbsp; As you implement
+    the rest of your arraylist methods, please write the accompanying
+    JUnit test, and add to any previous ones.<br>
+    <br>
+    <h2>Part 3 - Completing MyArrayList</h2>
+    <h2> </h2>
+    <p>Now, finish writing the public methods of your MyArrayList
+      class.&nbsp; Don't forget to write (and run!) the indicated tests
+      as you go along.</p>
+    <h3>More public methods</h3>
+    <p>Implement the following methods in your MyArrayList class:</p>
+    <dl class="code">
+      <dt>E set(int index, E element); </dt>
+      <dd>Change the value at the specified index to element.&nbsp;
+        Return the item that is being replaced. </dd>
+      <dd>Throw an <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/IndexOutOfBoundsException.html">IndexOutOfBoundsException</a>
+        if the index is not within the allowed range.&nbsp; Note that
+        this range is smaller than the range allowed for <tt>add()</tt>.
+      </dd>
+      <dd>In <tt>testSet()</tt>: Create a MyArrayList of Strings and an
+        ArrayList of Strings.&nbsp; Read the file <a href="http://www.cs.oberlin.edu/~jdonalds/151/labs/test1.txt">test1.txt</a>
+        and insert each line of the file, one at a time, into both
+        lists.&nbsp; Use the<span style="font-family: monospace;"><span style="font-weight: bold;"><span style="font-family:
+              Helvetica,Arial,Verdana,sans-serif;"></span></span></span>
+        <tt>add(element)</tt> method for your MyArrayList, but insert
+        the lines into the ArrayList using <tt>add(0,element<span style="font-family: Helvetica,Arial,Verdana,sans-serif;">)</span></tt>.
+        (The effect is that the two lists are in the opposite
+        order.)&nbsp; Now use use <tt>get()</tt> and <tt>set()</tt> to
+        reverse the order of the elements in your MyArrayList.&nbsp; The
+        two lists should now be in the same order.&nbsp;</dd>
+      <dd>Assert that the sizes of the two lists are the same. Then loop
+        through the two lists element-by-element and assert that the i<sup>th</sup>
+        elements should be equal for each i.</dd>
+      <dt>E remove(int index); </dt>
+      <dd>Remove the item at the specified index, shifting all other
+        elements to the left.&nbsp; Return the value that was removed. </dd>
+      <dd>Throw an <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/IndexOutOfBoundsException.html">IndexOutOfBoundsException</a>
+        if the index is not within the allowed range. Note that this
+        range is smaller than the range allowed for <tt>add()</tt>.<br>
+        <br>
+        In <tt>testRemove()</tt>: Read in <a href="http://www.cs.oberlin.edu/~jdonalds/151/labs/test1.txt">test1.txt</a>,
+        then remove every even-indexed entry, starting at 0 (that is,
+        entries 0, 2, 4,... in the original list; keep in mind that
+        positions change as items are removed) and add them into a
+        second MyArrayList.&nbsp; Check against a standard Java
+        ArrayList.<br>
+      </dd>
+      <dt>boolean isEmpty(); </dt>
+      <dd>Return true if there are no items stored, false otherwise. <br>
+        <br>
+        Write your own unit test for this method.. </dd>
+      <dt>void clear(); </dt>
+      <dd>Empty the list.&nbsp; Be sure to allow garbage collection to
+        take place by setting array entries to <code class="prettyprint
+          lang-java">null</code>. <br>
+        <br>
+        Write your own unit test for this method. </dd>
+    </dl>
+    <h3>Efficiency Checking</h3>
+    <p>Great! You are done your implementation, and you have written
+      some JUnit tests to make sure that each method works. Hopefully
+      everything is being added, set, and removed correctly. The last
+      thing we want to quickly check is that your program is working
+      efficiently. Add the following two tests to your test file
+      (precede the method header with the <tt>@Test</tt> tag): </p>
+    <ul class="padded">
+      <li><tt>testAddEfficiency()</tt>: Create a test program that
+        inserts 1,000,000 Integers starting at 1 onto the end of the
+        list (using the single-parameter <tt>add</tt>). &nbsp; Every
+        10,000 adds, print out the value.&nbsp; Note the speed with
+        which the program completes.&nbsp; Now insert the same Integers
+        but onto the front of the list.&nbsp; Does the speed
+        change?&nbsp; Why or why not?
+        <p>You may want to change this method's <tt>@Test</tt> tag to
+          an <tt>@Ignore</tt> tag before proceeding.&nbsp; This will
+          indicate to JUnit to ignore this test for the time being
+          (which is good, because it takes a while to run.) </p>
+      </li>
+      <li><tt>testRemoveEfficiency()</tt>: As with the previous test,
+        insert 1,000,000 Integers starting at 1 onto the end of the list
+        (using the single-parameter <tt>add</tt>).&nbsp; Now remove all
+        the elements from the back of the list (printing out the value
+        every 10,000 removes). This should run quickly (and if not, take
+        another look at your remove method). </li>
+      <li><tt>testMemory()</tt>: Finally, create a test program that
+        stores Integers and have it store values starting with 1 until
+        it runs out of memory or throws an exception (use an infinite
+        loop).&nbsp; Every 10,000 adds, print out the value.&nbsp; Note
+        what the last value printed was.&nbsp; Now run it again telling
+        it to use more memory and notice if the value changes or
+        not.&nbsp; You can tell Eclipse to use more memory by clicking <b>Run
+
+
+
+
+
+
+
+          &nbsp;&gt;&nbsp; Run Configurations...</b>, clicking on the <b>Arguments</b>
+        tab, and inserting <tt>-Xmx500m</tt> in the <b>VM arguments</b>
+        textbox.&nbsp; Or, you can run java from the command line:
+        <pre class="boxed">% <span class="typed">java -Xmx500m Test8</span></pre>
+        <p> Also, pay attention to the rate at which it prints out
+          numbers. Do you notice any changes? Run it again. Does it
+          behave the same? Why do you think this is happening? </p>
+      </li>
+    </ul>
+    <p>Please put your answers to the above questions in a <b>plain
+        text file</b> named <tt>README</tt> file, and submit it with
+      your lab.</p>
+    <p> <b>***** After you have completed the efficiency tests, please
+        put <tt>@Ignore</tt> in front of the <tt>@Test</tt> to disable
+        them. *****<br>
+        <br>
+      </b> </p>
+    <h3>Comments</h3>
+    <p>For this assignment, you only need to include a block comment at
+      the beginning of each of your java files, with a description of of
+      the contents of the file and your name.&nbsp; If you're familiar
+      with javadoc, it would be a good idea to write your comments in
+      javadoc style.&nbsp; We'll be covering javadoc later in the
+      course.<br>
+      <br>
+    </p>
+    <h2>handin</h2>
+    <p> Look through your programs and make sure you've included your
+      name at the top of all of them.&nbsp; If you know that there is a
+      problem in one of your programs, document that at the top.&nbsp;
+      If you adhered to the honor code in this assignment, add the
+      following statement as a comment at the top of your <tt>README</tt>,
+      <tt>MyArrayList.java</tt> and <tt>MyArrayListTest.java</tt>
+      files: </p>
+    <blockquote class="honor">
+      <p class="centered"> <q class="honor">I have adhered to the Honor
+          Code in this assignment.</q> </p>
+    </blockquote>
+    <p> <b>Quit Eclipse</b>, and then go through and <b>delete any
+        *.class files</b> and backup files.&nbsp; (If you don't quit
+      Eclipse first, it will keep regenerating your class files when it
+      autocompiles!) </p>
+    <p> You now just need to electronically handin all your files. </p>
+    <pre>    % <span class="typed">cd</span>          # changes to your home directory
+    % <span class="typed">cd cs151</span>    # goes to your cs151 folder
+    % <span class="typed">handin</span>      # starts the handin program
+                            # class is <span class="typed">151</span>
+                            # assignment is <span class="typed">2</span>
+                            # file/directory is <span class="typed">lab2</span>
+
+    % <span class="typed">lshand</span>      # should show that you've handed in something
+</pre>
+    <p> You can also specify the options to handin from the command line
+    </p>
+    <pre>    % <span class="typed">cd ~/cs151</span>                 # goes to your cs151 folder
+    % <span class="typed">handin -c 151 -a 2 lab2</span>
+
+    % <span class="typed">lshand</span>      # should show that you've handed in something
+</pre>
+    <p> </p>
+    <h2> </h2>
+    <pre><br></pre>
+  
+
+
+</body></html>
