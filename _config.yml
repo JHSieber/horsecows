@@ -86,7 +86,7 @@ analytics:
 author:
   name             : "Flying Horsecows"
   avatar           : /assets/images/oberlin3.jpg
-  bio              : "Official DIII Open Ultimate Team of Oberlin College & Conservatory"
+  bio              : "Official DIII Open Ultimate Team of Oberlin College"
   location         : "Oberlin, OH"
   email            : "flying.horsecows@gmail.com"
   uri              : 
@@ -247,9 +247,9 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: single
+      layout: archive
       author_profile: true
       read_time: true
-      comments: # true
+      comments: true
       share: true
       related: true
