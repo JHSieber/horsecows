@@ -1,7 +1,7 @@
 # main links
 main:
   - title: "home"
-    url: https://flyinghorsecows.com/
+    url: /index/
   - title: "photos"
     url: /photos/
   - title: "videos"
