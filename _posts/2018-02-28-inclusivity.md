@@ -14,4 +14,4 @@ tags:
 
 Lucy Brown, a member of the Preying Manti (Oberlin's women and trans ultimate team) recently published an article in Upwind Ultimate (formerly the National Ultimate League) titled 'Gender is a Spectrum: An Experience On Being Non-binary and How To Be More Inclusive'. Check it out below.
 
-[https://www.thenationalultimateleague.com/lucy-brown-gender-42717](https://www.thenationalultimateleague.com/lucy-brown-gender-42717)
+[https://www.upwindultimate.com/gender-is-a-spectrum/](https://www.upwindultimate.com/gender-is-a-spectrum/)
