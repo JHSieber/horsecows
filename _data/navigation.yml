@@ -6,6 +6,8 @@ main:
     url: /photos/
   - title: "videos"
     url: /videos/
+  - title: "history"
+    url: /history/
   - title: "force freedom"
     url: https://oberlinforcefreedom.weebly.com/
   - title: "contact"
