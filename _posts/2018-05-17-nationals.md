@@ -10,6 +10,7 @@ tags:
   - merch
   - horsecows
 ---
+The 2018 USA Ultimate D-III College Championships are returning to Rockford, IL. The 32 top women's and men's teams from D-III schools across the nation will compete for the 2018 titles.
 
 ## Dates:
 
