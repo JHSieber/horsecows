@@ -4,13 +4,13 @@ var store = [{
         "tags": ["preying manti","lucy brown","inclusivity"],
         "url": "http://localhost:4000/uncategorized/inclusivity/",
         "teaser":null},{
-        "title": "Stay tuned for updates on buying merch!",
-        "excerpt":"Check back to this website soon to find out how to purchase some sick horsecows swag.","categories": ["Uncategorized"],
-        "tags": ["merch","horsecows"],
-        "url": "http://localhost:4000/uncategorized/merch/",
-        "teaser":null},{
         "title": "Play with us!",
         "excerpt":"SO YOU WANNA TOSS A PIECE OF PLASTIC? No pig skin, no stick. Not rubber or wood. Only 175g of that sweet ultra star (NEVER WHAMO) brand Frisbee. Well this is the place for you. Come hone your skills with us as we work to be one of the greatest...","categories": ["Uncategorized"],
         "tags": ["play","freshmen","horsecows"],
         "url": "http://localhost:4000/uncategorized/play/",
+        "teaser":null},{
+        "title": "Horsecows at D-III College Championships: Everything You Need To Know",
+        "excerpt":"Dates:Saturday, May 19 - Sunday May, 20Location:Rockford Sportscore Two8800 East Riverside Blvd.Loves Park, IL 61111Field Map:Roster: Number First name Last name Year Height Weight Age Hometown Home State Major club team (if any)     0 Jack Kenslea So 6’4” 170 20 Newton MA Latin/ Politics       1...","categories": ["Uncategorized"],
+        "tags": ["merch","horsecows"],
+        "url": "http://localhost:4000/uncategorized/nationals/",
         "teaser":null}]
