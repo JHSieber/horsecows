@@ -74,7 +74,7 @@ TBA
 
 ## Livestream
 
-All games will be livestreamed from the Oberlin College Ultimate Facebook page. Thank you to former Horsecows Eoin Mullaney and Alex Abramowitz for the commentary. 
+All games will be livestreamed from the Oberlin College Ultimate Facebook page. Thank you to former Horsecows Eoin Mullaney and Alex Abramowitz for the commentary. Click [here](https://ultiworld.com/2018/05/16/7500-club-nationals-preview-prop-bets-film-coverage/) to listen to the 7500 Club's D-III Nationals Preview. 
 
 ## Site Rules
 1. No Tobacco! This is a smoke- and tobacco-free campus. Facility staff, event staff and security will be checking to make sure people are not smoking. There will also be lots of moms, dads and kids watching the action. Please abide by these rules. If you are caught with tobacco at the field site, you will risk disqualification for your team as well as potential ramifications outside of the event for breaking the field regulations. Thank you!
