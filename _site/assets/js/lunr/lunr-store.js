@@ -10,7 +10,12 @@ var store = [{
         "url": "http://localhost:4000/uncategorized/play/",
         "teaser":null},{
         "title": "Horsecows at D-III College Championships: Everything You Need To Know",
-        "excerpt":"Dates:Saturday, May 19 - Sunday May, 20Location:Rockford Sportscore Two8800 East Riverside Blvd.Loves Park, IL 61111Field Map:Roster: Number First name Last name Year Height Weight Age Hometown Home State Major club team (if any)     0 Jack Kenslea So 6’4” 170 20 Newton MA Latin/ Politics       1...","categories": ["Uncategorized"],
+        "excerpt":"The 2018 USA Ultimate D-III College Championships are returning to Rockford, IL. The 32 top women’s and men’s teams from D-III schools across the nation will compete for the 2018 titles.Dates:Saturday, May 19 - Sunday May, 20Location:Rockford Sportscore Two8800 East Riverside Blvd.Loves Park, IL 61111Field Map:Roster: Number First name Last...","categories": ["Uncategorized"],
         "tags": ["merch","horsecows"],
         "url": "http://localhost:4000/uncategorized/nationals/",
+        "teaser":null},{
+        "title": "Horsecows Announce Team Roster for 2019 Season",
+        "excerpt":"Oberlin Men’s Ultimate returns this year with a healthy, low-cal contingent of returners and a steadfast legion of newcomers.The Horsecows look improve off of last year’s nationals run by filling the void left by grads Toby Harvey and Lucien Fitzpatrick, as well as renowned traitor Talon Johnson, who transferred to...","categories": ["Uncategorized"],
+        "tags": [2019,"roster"],
+        "url": "http://localhost:4000/uncategorized/roster/",
         "teaser":null}]
